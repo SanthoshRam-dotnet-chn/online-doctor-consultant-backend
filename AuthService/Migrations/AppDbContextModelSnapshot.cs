@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using UserAuthService.src.AuthService.Infrastructure.Data;
+using AuthService.src.AuthService.Infrastructure.Data;
 
 #nullable disable
 

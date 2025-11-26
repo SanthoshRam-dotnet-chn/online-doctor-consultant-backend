@@ -2,9 +2,9 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using UserAuthService.src.AuthService.Domain.Entities;
+using AuthService.src.AuthService.Domain.Entities;
 
-namespace JwtTestingDemo.src.AuthService.Infrastructure.Jwt
+namespace AuthService.src.AuthService.Infrastructure.Jwt
 {
     public class JwtTokenGenerator
     {

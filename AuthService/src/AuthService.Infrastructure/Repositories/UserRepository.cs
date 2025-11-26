@@ -1,9 +1,10 @@
-﻿using JwtTestingDemo.src.AuthService.Infrastructure.Interfaces;
+﻿using AuthService.src.AuthService.Infrastructure.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using UserAuthService.src.AuthService.Domain.Entities;
-using UserAuthService.src.AuthService.Infrastructure.Data;
+using AuthService.src.AuthService.Domain.Entities;
+using AuthService.src.AuthService.Infrastructure.Data;
 
-namespace UserAuthService.src.AuthService.Infrastructure.Repositories
+
+namespace AuthService.src.AuthService.Infrastructure.Repositories
 {
     public class UserRepository : IUserRepository
     {

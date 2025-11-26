@@ -1,6 +1,6 @@
-﻿using UserAuthService.src.AuthService.Domain.Entities;
+﻿using AuthService.src.AuthService.Domain.Entities;
 
-namespace JwtTestingDemo.src.AuthService.Infrastructure.Interfaces
+namespace AuthService.src.AuthService.Infrastructure.Interfaces
 {
     public interface IUserRepository
     {

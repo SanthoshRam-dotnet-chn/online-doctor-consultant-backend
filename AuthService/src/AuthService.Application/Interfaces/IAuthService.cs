@@ -1,6 +1,6 @@
-﻿using UserAuthService.src.AuthService.Application.DTOs;
+﻿using AuthService.src.AuthService.Application.DTOs;
 
-namespace JwtTestingDemo.src.AuthService.Application.Interfaces
+namespace AuthService.src.AuthService.Application.Interfaces
 {
     public interface IAuthService
     {

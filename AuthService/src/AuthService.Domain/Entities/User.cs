@@ -1,4 +1,4 @@
-﻿namespace UserAuthService.src.AuthService.Domain.Entities
+﻿namespace AuthService.src.AuthService.Domain.Entities
 {
     public class User
     {

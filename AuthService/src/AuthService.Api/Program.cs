@@ -1,10 +1,12 @@
-using JwtTestingDemo.src.AuthService.Application.Interfaces;
-using JwtTestingDemo.src.AuthService.Application.Services;
-using JwtTestingDemo.src.AuthService.Infrastructure.Interfaces;
-using JwtTestingDemo.src.AuthService.Infrastructure.Jwt;
+
+using AuthService.src.AuthService.Infrastructure.Interfaces;
+using AuthService.src.AuthService.Infrastructure.Jwt;
 using Microsoft.EntityFrameworkCore;
-using UserAuthService.src.AuthService.Infrastructure.Data;
-using UserAuthService.src.AuthService.Infrastructure.Repositories;
+using AuthService.src.AuthService.Infrastructure.Data;
+using AuthService.src.AuthService.Infrastructure.Repositories;
+using AuthService.src.AuthService.Application.Services;
+
+using AuthService.src.AuthService.Application.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +17,7 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IAuthService, UserAuthService>();
 builder.Services.AddSingleton<JwtTokenGenerator>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

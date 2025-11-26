@@ -1,19 +1,19 @@
-﻿using JwtTestingDemo.src.AuthService.Application.Interfaces;
-using JwtTestingDemo.src.AuthService.Infrastructure.Interfaces;
-using JwtTestingDemo.src.AuthService.Infrastructure.Jwt;
+﻿using AuthService.src.AuthService.Application.DTOs;
+using AuthService.src.AuthService.Application.Interfaces;
+using AuthService.src.AuthService.Domain.Entities;
+using AuthService.src.AuthService.Infrastructure.Interfaces;
+using AuthService.src.AuthService.Infrastructure.Jwt;
 using Microsoft.AspNetCore.Identity;
-using UserAuthService.src.AuthService.Application.DTOs;
-using UserAuthService.src.AuthService.Domain.Entities;
 
-namespace JwtTestingDemo.src.AuthService.Application.Services
+namespace AuthService.src.AuthService.Application.Services
 {
-    public class AuthService : IAuthService
+    public class UserAuthService : IAuthService
     {
         private readonly IUserRepository _repo;
         private readonly JwtTokenGenerator _jwt;
         private readonly PasswordHasher<User> _hasher;
 
-        public AuthService(IUserRepository repo, JwtTokenGenerator jwt)
+        public UserAuthService(IUserRepository repo, JwtTokenGenerator jwt)
         {
             _repo = repo;
             _jwt = jwt;

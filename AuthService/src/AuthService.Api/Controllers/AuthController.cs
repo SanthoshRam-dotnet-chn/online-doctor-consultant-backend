@@ -1,10 +1,11 @@
-﻿using JwtTestingDemo.src.AuthService.Application.Interfaces;
+﻿
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using UserAuthService.src.AuthService.Application.DTOs;
+using AuthService.src.AuthService.Application.DTOs;
+using AuthService.src.AuthService.Application.Interfaces;
 
 
-namespace UserAuthService.src.AuthService.Api.Controllers
+namespace AuthService.src.AuthService.Api.Controllers
 {
     [ApiController]
     [Route("api/auth")]
