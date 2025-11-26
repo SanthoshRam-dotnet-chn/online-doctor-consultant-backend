@@ -1,12 +1,12 @@
 
+using AuthService.src.AuthService.Api.Middleware;
+using AuthService.src.AuthService.Application.Interfaces;
+using AuthService.src.AuthService.Application.Services;
+using AuthService.src.AuthService.Infrastructure.Data;
 using AuthService.src.AuthService.Infrastructure.Interfaces;
 using AuthService.src.AuthService.Infrastructure.Jwt;
-using Microsoft.EntityFrameworkCore;
-using AuthService.src.AuthService.Infrastructure.Data;
 using AuthService.src.AuthService.Infrastructure.Repositories;
-using AuthService.src.AuthService.Application.Services;
-
-using AuthService.src.AuthService.Application.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,7 +32,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseMiddleware<GlobalExceptionMiddleware>();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

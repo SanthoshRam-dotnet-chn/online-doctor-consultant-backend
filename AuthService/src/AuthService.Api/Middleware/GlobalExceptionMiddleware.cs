@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using System.Text.Json;
+using AuthService.src.AuthService.Application.Exceptions;
 
 namespace AuthService.src.AuthService.Api.Middleware
 {
@@ -25,7 +26,13 @@ namespace AuthService.src.AuthService.Api.Middleware
                 _logger.LogError(ex, "Unhandled exception occurred");
 
                 context.Response.ContentType = "application/json";
-                context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                context.Response.StatusCode = ex switch
+                {
+                    EmailAlreadyExistsException => StatusCodes.Status409Conflict,
+                    InvalidCredentialsException => StatusCodes.Status401Unauthorized,
+                    UserNotFoundException => StatusCodes.Status404NotFound,
+                    _ => StatusCodes.Status400BadRequest
+                };
 
                 var response = new
                 {

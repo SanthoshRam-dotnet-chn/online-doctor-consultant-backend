@@ -1,4 +1,5 @@
 ﻿using AuthService.src.AuthService.Application.DTOs;
+using AuthService.src.AuthService.Application.Exceptions;
 using AuthService.src.AuthService.Application.Interfaces;
 using AuthService.src.AuthService.Domain.Entities;
 using AuthService.src.AuthService.Infrastructure.Interfaces;
@@ -23,7 +24,8 @@ namespace AuthService.src.AuthService.Application.Services
         public async Task<AuthResponse> RegisterAsync(RegisterRequest req)
         {
             var existing = await _repo.GetByEmailAsync(req.Email);
-            if (existing != null) throw new Exception("Email already exists");
+            if (existing != null) throw new EmailAlreadyExistsException();
+
 
             var user = new User
             {
@@ -49,12 +51,13 @@ namespace AuthService.src.AuthService.Application.Services
         public async Task<AuthResponse> LoginAsync(LoginRequest req)
         {
             var user = await _repo.GetByEmailAsync(req.Email)
-                ?? throw new Exception("Invalid email or password");
+                ?? throw new InvalidCredentialsException();
+
 
             var verification = _hasher.VerifyHashedPassword(user, user.PasswordHash, req.Password);
 
             if (verification == PasswordVerificationResult.Failed)
-                throw new Exception("Invalid email or password");
+                throw new InvalidCredentialsException();
 
             return new AuthResponse
             {
