@@ -2,7 +2,7 @@
 {
     public interface IVideoProvider
     {
-        Task<(string roomName, string externalUrl)> CreateRoomAsync(Guid appointmentId, bool waitingRoom);
-        // TODO: Optionally: Task CloseRoomAsync(string roomName);
+        Task<(string roomName, string externalUrl)> CreateRoom(Guid apptId, bool waitingRoomEnabled);
     }
+
 }

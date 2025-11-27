@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using VideoService.Application;
 using VideoService.Infrastructure;
 using VideoService.Services;
 using VideoService.Services.Providers;
@@ -14,6 +13,12 @@ builder.Services.AddDbContext<ApplicationDbContext>(opts =>
 builder.Services.AddScoped<IVideoProvider, JitsiProvider>(); // default provider
 builder.Services.AddScoped<IVideoService, VideoServiceImpl>();
 builder.Services.AddSingleton<IJoinTokenService, JoinTokenService>();
+
+// Typed HttpClient for PatientService
+builder.Services.AddHttpClient<IAppointmentClient, AppointmentClient>(c =>
+{
+    c.BaseAddress = new Uri(builder.Configuration["PatientService:BaseUrl"]);
+});
 
 // controllers
 builder.Services.AddControllers();
