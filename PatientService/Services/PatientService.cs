@@ -22,7 +22,7 @@ namespace PatientService.Services
             if (slot == null)
                 throw new Exception("Slot does not exist.");
 
-            if (slot.Status != "Available")
+            if (!slot.IsAvailable)
                 throw new Exception("Slot is not available.");
 
             // 2. Mark slot as booked

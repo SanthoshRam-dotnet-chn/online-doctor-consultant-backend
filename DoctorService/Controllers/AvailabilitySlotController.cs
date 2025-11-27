@@ -1,4 +1,5 @@
-﻿using DoctorService.Interfaces;
+﻿using DoctorService.Exceptions;
+using DoctorService.Interfaces;
 using DoctorService.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -46,8 +47,33 @@ namespace DoctorService.Controllers
         [HttpPatch("book/{id}")]
         public async Task<IActionResult> MarkAsBooked(Guid id)
         {
-            await _service.MarkSlotAsBookedAsync(id);
-            return Ok(new { success = true, message = "Slot marked as booked." });
+            try
+            {
+                await _service.MarkSlotAsBookedAsync(id);
+                return Ok(new { success = true, message = "Slot marked as booked." });
+            }
+            catch (SlotNotFoundException ex)
+            {
+                return NotFound(new { success = false, message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { success = false, message = ex.Message });
+            }
+        }
+
+        [HttpGet("slot/{id}")]
+        public async Task<IActionResult> GetSlotById(Guid id)
+        {
+            try
+            {
+                var slot = await _service.GetSlotByIdAsync(id);
+                return Ok(slot);
+            }
+            catch (SlotNotFoundException ex)
+            {
+                return NotFound(new { success = false, message = ex.Message });
+            }
         }
 
     }

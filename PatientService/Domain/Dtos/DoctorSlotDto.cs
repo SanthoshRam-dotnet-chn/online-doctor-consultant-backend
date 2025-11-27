@@ -1,4 +1,6 @@
-﻿namespace PatientService.Domain.Dtos
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace PatientService.Domain.Dtos
 {
     public class DoctorSlotDto
     {
@@ -6,7 +8,7 @@
         public Guid DoctorId { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
-        public string Status { get; set; }
+        public bool IsAvailable { get; set; } 
     }
 
 }

@@ -12,5 +12,6 @@ namespace DoctorService.Interfaces
         Task<bool> SlotExistsAsync(Guid doctorId, DateTime startTime, DateTime endTime);
         Task<bool> MarkAsBookedAsync(Guid id);
 
+
     }
 }

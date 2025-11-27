@@ -13,7 +13,7 @@ namespace PatientService.Services
 
         public async Task<DoctorSlotDto?> GetSlotById(Guid slotId)
         {
-            var response = await _http.GetAsync($"/mock/c542fc19-eed5-4e14-a20d-9931f8e431c9");
+            var response = await _http.GetAsync($"/api/AvailabilitySlot/slot/{slotId}");
 
             if (!response.IsSuccessStatusCode) return null;
 
@@ -22,7 +22,7 @@ namespace PatientService.Services
 
         public async Task<bool> MarkSlotAsBooked(Guid slotId)
         {
-            var response = await _http.PutAsync($"/mock/e42e93f2-8802-4717-88ba-0d1cc2b035c7", null);
+            var response = await _http.PatchAsync($"/api/AvailabilitySlot/book/{slotId}", null);
             return response.IsSuccessStatusCode;
         }
     }
