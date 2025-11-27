@@ -1,9 +1,8 @@
-﻿
+﻿using AuthService.src.AuthService.Application.DTOs;
+using AuthService.src.AuthService.Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using AuthService.src.AuthService.Application.DTOs;
-using AuthService.src.AuthService.Application.Interfaces;
-
 
 namespace AuthService.src.AuthService.Api.Controllers
 {
@@ -19,14 +18,23 @@ namespace AuthService.src.AuthService.Api.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register(RegisterRequest request)
-            => Ok(await _service.RegisterAsync(request));
+        public async Task<IActionResult> Register(RegisterRequest request) =>
+            Ok(await _service.RegisterAsync(request));
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login(LoginRequest request)
-            => Ok(await _service.LoginAsync(request));
+        public async Task<IActionResult> Login(LoginRequest request) =>
+            Ok(await _service.LoginAsync(request));
+
+        [Authorize(Roles = "admin")]
+        [HttpGet("users")]
+        public async Task<IActionResult> GetAllUsers() => Ok(await _service.GetAllUsersAsync());
+
         [HttpGet("test")]
-        public async Task<IActionResult> Test()
-            => Ok("Auth Service is working!");
+        public async Task<IActionResult> Test() => Ok("Auth Service is working!");
+
+        [Authorize]
+        [HttpGet("secure")]
+        public async Task<IActionResult> ProtectedRoute() =>
+            Ok("Secure Service is Working Good with JWT!");
     }
 }

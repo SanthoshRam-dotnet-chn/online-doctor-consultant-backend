@@ -66,5 +66,67 @@ namespace AuthService.src.AuthService.Application.Services
                 Token = _jwt.GenerateToken(user)
             };
         }
+
+        public async Task<IEnumerable<PatientDto>> GetAllPatientsAsync()
+        {
+            var users = await _repo.GetByRoleAsync("patient");
+
+            return users.Select(u => new PatientDto
+            {
+                UserId = u.UserId,
+                FirstName = u.FirstName,
+                LastName = u.LastName,
+                Phone = u.Phone,
+                DateOfBirth = u.DateOfBirth
+            }).ToList();
+        }
+
+        public async Task<IEnumerable<DoctorDto>> GetAllDoctorsAsync()
+        {
+            var users = await _repo.GetByRoleAsync("doctor");
+
+            return users.Select(u => new DoctorDto
+            {
+                UserId = u.UserId,
+                FirstName = u.FirstName,
+                LastName = u.LastName,
+                Specialization = u.Specialization,
+                Experience = u.Experience
+            }).ToList();
+        }
+        public async Task<DoctorDto?> GetDoctorByIdAsync(Guid id)
+        {
+            var doctor = await _repo.GetDoctorByIdAsync(id);
+
+            if (doctor == null)
+                return null;
+
+            return new DoctorDto
+            {
+                UserId = doctor.UserId,
+                FirstName = doctor.FirstName,
+                LastName = doctor.LastName,
+                Specialization = doctor.Specialization,
+                Experience = doctor.Experience
+            };
+        }
+
+
+        public async Task<IEnumerable<UserDto>> GetAllUsersAsync()
+        {
+            var users = await _repo.GetAllAsync();
+
+            return users.Select(u => new UserDto
+            {
+                UserId = u.UserId,
+                Role = u.Role,
+                Email = u.Email,
+                FirstName = u.FirstName,
+                LastName = u.LastName,
+                Phone = u.Phone,
+                DateOfBirth = u.DateOfBirth
+            }).ToList();
+        }
+
     }
 }
