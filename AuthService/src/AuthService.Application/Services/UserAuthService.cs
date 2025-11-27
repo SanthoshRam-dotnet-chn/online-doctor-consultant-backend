@@ -94,6 +94,23 @@ namespace AuthService.src.AuthService.Application.Services
                 Experience = u.Experience
             }).ToList();
         }
+        public async Task<DoctorDto?> GetDoctorByIdAsync(Guid id)
+        {
+            var doctor = await _repo.GetDoctorByIdAsync(id);
+
+            if (doctor == null)
+                return null;
+
+            return new DoctorDto
+            {
+                UserId = doctor.UserId,
+                FirstName = doctor.FirstName,
+                LastName = doctor.LastName,
+                Specialization = doctor.Specialization,
+                Experience = doctor.Experience
+            };
+        }
+
 
         public async Task<IEnumerable<UserDto>> GetAllUsersAsync()
         {

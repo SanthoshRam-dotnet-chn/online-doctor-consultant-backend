@@ -9,5 +9,8 @@ namespace AuthService.src.AuthService.Application.Interfaces
         Task<IEnumerable<PatientDto>> GetAllPatientsAsync();
         Task<IEnumerable<DoctorDto>> GetAllDoctorsAsync();
         Task<IEnumerable<UserDto>> GetAllUsersAsync();
+        Task<DoctorDto?> GetDoctorByIdAsync(Guid id);
+
+
     }
 }

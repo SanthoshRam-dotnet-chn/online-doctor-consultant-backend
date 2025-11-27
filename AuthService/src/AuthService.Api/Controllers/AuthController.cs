@@ -25,15 +25,6 @@ namespace AuthService.src.AuthService.Api.Controllers
         public async Task<IActionResult> Login(LoginRequest request) =>
             Ok(await _service.LoginAsync(request));
 
-        [Authorize]
-        [HttpGet("patients")]
-        public async Task<IActionResult> GetAllPatients() =>
-            Ok(await _service.GetAllPatientsAsync());
-
-        [Authorize]
-        [HttpGet("doctors")]
-        public async Task<IActionResult> GetAllDoctors() => Ok(await _service.GetAllDoctorsAsync());
-
         [Authorize(Roles = "admin")]
         [HttpGet("users")]
         public async Task<IActionResult> GetAllUsers() => Ok(await _service.GetAllUsersAsync());
@@ -43,6 +34,7 @@ namespace AuthService.src.AuthService.Api.Controllers
 
         [Authorize]
         [HttpGet("secure")]
-        public async Task<IActionResult> ProtectedRoute() => Ok("Auth Service is working!");
+        public async Task<IActionResult> ProtectedRoute() =>
+            Ok("Secure Service is Working Good with JWT!");
     }
 }
