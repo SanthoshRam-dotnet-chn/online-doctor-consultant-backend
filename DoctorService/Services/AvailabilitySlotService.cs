@@ -19,7 +19,7 @@ namespace DoctorService.Services
             if (exists)
                 throw new SlotAlreadyExistsException("The availability slot overlaps with an existing slot.");
             slot.Id = Guid.NewGuid();
-            slot.Status = "Available";
+            slot.IsAvailable = true;
 
             await _repository.AddSlotAsync(slot);
             return slot;
