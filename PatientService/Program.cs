@@ -15,6 +15,8 @@ builder.Services.AddHttpClient<DoctorServiceClient>(client =>
 {
     client.BaseAddress = new Uri(builder.Configuration["DoctorService:BaseUrl"]);
 });
+builder.Services.AddScoped<IPatientRecordRepository, PatientRecordRepository>();
+builder.Services.AddScoped<IPatientRecordService, PatientRecordService>();
 
 builder.Services.AddScoped<IAppointmentRepository, AppointmentRepository>();
 builder.Services.AddScoped<IPatientService, PatientService.Services.PatientService>();
