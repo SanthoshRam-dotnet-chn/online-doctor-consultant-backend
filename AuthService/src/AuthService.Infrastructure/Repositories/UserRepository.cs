@@ -1,7 +1,9 @@
-﻿using AuthService.src.AuthService.Domain.Entities;
+﻿using AuthService.src.AuthService.Application.DTOs;
+using AuthService.src.AuthService.Domain.Entities;
 using AuthService.src.AuthService.Infrastructure.Data;
 using AuthService.src.AuthService.Infrastructure.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System.Numerics;
 
 namespace AuthService.src.AuthService.Infrastructure.Repositories
 {
@@ -35,5 +37,13 @@ namespace AuthService.src.AuthService.Infrastructure.Repositories
                 .Where(u => u.Role.ToLower() == role.ToLower())
                 .ToListAsync();
         }
+
+        public async Task<User?> GetDoctorByIdAsync(Guid id)
+        {
+            return await _db.Users
+                .FirstOrDefaultAsync(d => d.UserId == id);
+        }
+
+
     }
 }
