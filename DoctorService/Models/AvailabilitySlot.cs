@@ -18,6 +18,6 @@ namespace DoctorService.Models
         public DateTime EndTime { get; set; }
 
         [Required]
-        public string Status { get; set; } = "Not Available";
+        public bool IsAvailable { get; set; } = false;
     }
 }
