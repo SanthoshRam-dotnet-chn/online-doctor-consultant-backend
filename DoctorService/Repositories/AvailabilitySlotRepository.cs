@@ -58,5 +58,17 @@ namespace DoctorService.Repositories
                  (startTime <= s.StartTime && endTime >= s.EndTime))
             );
         }
+
+        //adding method to set booked
+        public async Task<bool> MarkAsBookedAsync(Guid id)
+        {
+            var slot = await _context.AvailabilitySlots.FindAsync(id);
+            if (slot == null) return false;
+
+            slot.IsAvailable = false;
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
     }
 }

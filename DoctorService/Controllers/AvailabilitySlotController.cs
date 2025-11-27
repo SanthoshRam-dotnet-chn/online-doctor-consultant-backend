@@ -42,5 +42,13 @@ namespace DoctorService.Controllers
             await _service.DeleteSlotAsync(id);
             return NoContent();
         }
+
+        [HttpPatch("book/{id}")]
+        public async Task<IActionResult> MarkAsBooked(Guid id)
+        {
+            await _service.MarkSlotAsBookedAsync(id);
+            return Ok(new { success = true, message = "Slot marked as booked." });
+        }
+
     }
 }

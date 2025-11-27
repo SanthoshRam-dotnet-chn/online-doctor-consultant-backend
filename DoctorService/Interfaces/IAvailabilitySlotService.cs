@@ -8,5 +8,7 @@ namespace DoctorService.Interfaces
         Task<IEnumerable<AvailabilitySlot>> GetSlotsByDoctorAndDateAsync(Guid doctorId, DateTime date);
         Task<AvailabilitySlot> CreateSlotAsync(AvailabilitySlot slot);
         Task DeleteSlotAsync(Guid id);
+        Task MarkSlotAsBookedAsync(Guid id);
+
     }
 }

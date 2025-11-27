@@ -10,5 +10,7 @@ namespace DoctorService.Interfaces
         Task DeleteSlotAsync(Guid id);
         Task<AvailabilitySlot> GetSlotByIdAsync(Guid id);
         Task<bool> SlotExistsAsync(Guid doctorId, DateTime startTime, DateTime endTime);
+        Task<bool> MarkAsBookedAsync(Guid id);
+
     }
 }
