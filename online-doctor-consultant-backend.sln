@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36414.22 d17.14
+VisualStudioVersion = 17.14.36414.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthService", "AuthService\AuthService.csproj", "{43B398DC-D60D-451A-8BBA-83052ACD8183}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoctorService", "DoctorService\DoctorService.csproj", "{4E39D1F0-653F-4489-81E4-69CD4C3F9BF5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API_Gateway", "API_Gateway\API_Gateway.csproj", "{01FC4E90-055C-4EB5-9D61-684C7D415D04}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoService", "VideoService\VideoService.csproj", "{CF4566DA-7AE8-4BAC-8E97-860F82A16336}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{01FC4E90-055C-4EB5-9D61-684C7D415D04}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{01FC4E90-055C-4EB5-9D61-684C7D415D04}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{01FC4E90-055C-4EB5-9D61-684C7D415D04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF4566DA-7AE8-4BAC-8E97-860F82A16336}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF4566DA-7AE8-4BAC-8E97-860F82A16336}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF4566DA-7AE8-4BAC-8E97-860F82A16336}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF4566DA-7AE8-4BAC-8E97-860F82A16336}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

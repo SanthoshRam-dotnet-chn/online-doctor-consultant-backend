@@ -1,4 +1,4 @@
-namespace AuthService
+namespace VideoService
 {
     public class WeatherForecast
     {

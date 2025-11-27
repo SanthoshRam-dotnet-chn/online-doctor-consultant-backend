@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace AuthService.Controllers
+namespace VideoService.Controllers
 {
     [ApiController]
     [Route("[controller]")]
