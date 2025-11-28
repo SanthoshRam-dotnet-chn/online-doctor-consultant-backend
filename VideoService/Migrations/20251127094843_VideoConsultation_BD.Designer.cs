@@ -12,7 +12,7 @@ using VideoService.Infrastructure;
 namespace VideoService.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251126124544_VideoConsultation_BD")]
+    [Migration("20251127094843_VideoConsultation_BD")]
     partial class VideoConsultation_BD
     {
         /// <inheritdoc />
@@ -24,36 +24,6 @@ namespace VideoService.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("VideoService.Domain.Entities.Appointment", b =>
-                {
-                    b.Property<Guid>("AppointmentId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("DoctorId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("EndedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("PatientId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("ScheduledEnd")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("ScheduledStart")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("AppointmentId");
-
-                    b.ToTable("Appointments");
-                });
 
             modelBuilder.Entity("VideoService.Domain.Entities.VideoRoom", b =>
                 {

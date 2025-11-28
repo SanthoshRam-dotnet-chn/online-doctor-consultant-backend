@@ -7,60 +7,57 @@ namespace VideoService.Services
 {
     public interface IJoinTokenService
     {
-        string GenerateJoinToken(Guid appointmentId, Guid userId, string role, TimeSpan? ttl = null);
-        ClaimsPrincipal? ValidateJoinToken(string token);
+        string GenerateJoinToken(Guid appointmentId, Guid userId, string role);
+        ClaimsPrincipal? Validate(string token);
     }
 
     public class JoinTokenService : IJoinTokenService
     {
         private readonly IConfiguration _config;
         private readonly SymmetricSecurityKey _key;
-        private readonly int _defaultMinutes;
 
         public JoinTokenService(IConfiguration config)
         {
             _config = config;
-            var secret = _config["VideoService:JoinTokenSecret"] ?? throw new InvalidOperationException("JoinTokenSecret missing");
-            _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret));
-            _defaultMinutes = int.TryParse(_config["VideoService:JoinTokenExpiryMinutes"], out var m) ? m : 30;
+            _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["VideoService:JoinTokenSecret"]));
         }
 
-        public string GenerateJoinToken(Guid appointmentId, Guid userId, string role, TimeSpan? ttl = null)
+        public string GenerateJoinToken(Guid appointmentId, Guid userId, string role)
         {
-            var expires = DateTime.UtcNow.Add(ttl ?? TimeSpan.FromMinutes(_defaultMinutes));
-            var claims = new[]
-            {
-                new Claim("appointmentId", appointmentId.ToString()),
-                new Claim("userId", userId.ToString()),
-                new Claim(ClaimTypes.Role, role)
-            };
-
             var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha256);
+            var expires = DateTime.UtcNow.AddMinutes(Convert.ToInt32(_config["VideoService:JoinTokenExpiryMinutes"]));
+
             var token = new JwtSecurityToken(
-                claims: claims,
+                claims: new[]
+                {
+                    new Claim("appointmentId", appointmentId.ToString()),
+                    new Claim("userId", userId.ToString()),
+                    new Claim(ClaimTypes.Role, role)
+                },
                 expires: expires,
-                signingCredentials: creds);
+                signingCredentials: creds
+            );
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        public ClaimsPrincipal? ValidateJoinToken(string token)
+        public ClaimsPrincipal? Validate(string token)
         {
-            var tokenHandler = new JwtSecurityTokenHandler();
             try
             {
-                var parameters = new TokenValidationParameters
-                {
-                    ValidateIssuer = false,
-                    ValidateAudience = false,
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = _key,
-                    ValidateLifetime = true,
-                    ClockSkew = TimeSpan.FromSeconds(30)
-                };
+                var handler = new JwtSecurityTokenHandler();
 
-                var principal = tokenHandler.ValidateToken(token, parameters, out var validatedToken);
-                return principal;
+                return handler.ValidateToken(
+                    token,
+                    new TokenValidationParameters
+                    {
+                        ValidateIssuer = false,
+                        ValidateAudience = false,
+                        IssuerSigningKey = _key,
+                        ValidateLifetime = true
+                    },
+                    out _
+                );
             }
             catch
             {
