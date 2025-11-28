@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API_Gateway", "API_Gateway\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoService", "VideoService\VideoService.csproj", "{CF4566DA-7AE8-4BAC-8E97-860F82A16336}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotificationService", "NotificationService\NotificationService.csproj", "{1018924B-1EA9-4C73-B844-EE51D4F8B45F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{CF4566DA-7AE8-4BAC-8E97-860F82A16336}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF4566DA-7AE8-4BAC-8E97-860F82A16336}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF4566DA-7AE8-4BAC-8E97-860F82A16336}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1018924B-1EA9-4C73-B844-EE51D4F8B45F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1018924B-1EA9-4C73-B844-EE51D4F8B45F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1018924B-1EA9-4C73-B844-EE51D4F8B45F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1018924B-1EA9-4C73-B844-EE51D4F8B45F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
