@@ -21,11 +21,10 @@ namespace AuthService.src.AuthService.Application.Services
             _hasher = new PasswordHasher<User>();
         }
 
-        public async Task<AuthResponse> RegisterAsync(RegisterRequest req)
+        public async Task<AuthResult> RegisterAsync(RegisterRequest req)
         {
             var existing = await _repo.GetByEmailAsync(req.Email);
             if (existing != null) throw new EmailAlreadyExistsException();
-
 
             var user = new User
             {
@@ -37,35 +36,33 @@ namespace AuthService.src.AuthService.Application.Services
             };
 
             user.PasswordHash = _hasher.HashPassword(user, req.Password);
-
             await _repo.AddAsync(user);
 
-            return new AuthResponse
+            var token = _jwt.GenerateToken(user);
+
+            return new AuthResult
             {
-                Email = user.Email,
-                Role = user.Role,
-                Token = _jwt.GenerateToken(user)
+                User = new AuthResponse { Email = user.Email, Role = user.Role },
+                Token = token
             };
         }
 
-        public async Task<AuthResponse> LoginAsync(LoginRequest req)
+        public async Task<AuthResult> LoginAsync(LoginRequest req)
         {
-            var user = await _repo.GetByEmailAsync(req.Email)
-                ?? throw new InvalidCredentialsException();
-
-
+            var user = await _repo.GetByEmailAsync(req.Email) ?? throw new InvalidCredentialsException();
             var verification = _hasher.VerifyHashedPassword(user, user.PasswordHash, req.Password);
+            if (verification == PasswordVerificationResult.Failed) throw new InvalidCredentialsException();
 
-            if (verification == PasswordVerificationResult.Failed)
-                throw new InvalidCredentialsException();
+            var token = _jwt.GenerateToken(user);
 
-            return new AuthResponse
+            return new AuthResult
             {
-                Email = user.Email,
-                Role = user.Role,
-                Token = _jwt.GenerateToken(user)
+                User = new AuthResponse { Email = user.Email, Role = user.Role },
+                Token = token
             };
         }
+
+
 
         public async Task<IEnumerable<PatientDto>> GetAllPatientsAsync()
         {
