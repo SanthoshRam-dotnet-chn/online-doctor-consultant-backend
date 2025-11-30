@@ -1,9 +1,9 @@
-﻿using AuthService.src.AuthService.Application.DTOs;
+﻿using System.Numerics;
+using AuthService.src.AuthService.Application.DTOs;
 using AuthService.src.AuthService.Domain.Entities;
 using AuthService.src.AuthService.Infrastructure.Data;
 using AuthService.src.AuthService.Infrastructure.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System.Numerics;
 
 namespace AuthService.src.AuthService.Infrastructure.Repositories
 {
@@ -33,22 +33,19 @@ namespace AuthService.src.AuthService.Infrastructure.Repositories
 
         public async Task<IEnumerable<User>> GetByRoleAsync(string role)
         {
-            return await _db.Users
-                .Where(u => u.Role.ToLower() == role.ToLower())
-                .ToListAsync();
+            return await _db.Users.Where(u => u.Role.ToLower() == role.ToLower()).ToListAsync();
         }
 
         public async Task<User?> GetDoctorByIdAsync(Guid id)
         {
-            return await _db.Users
-                .FirstOrDefaultAsync(d => d.UserId == id);
+            return await _db.Users.FirstOrDefaultAsync(d => d.UserId == id);
         }
+
         public async Task<User?> GetPatientByIdAsync(Guid id)
         {
-            return await _db.Users
-                .FirstOrDefaultAsync(p => p.UserId == id && p.Role.ToLower() == "patient");
+            return await _db.Users.FirstOrDefaultAsync(p =>
+                p.UserId == id && p.Role.ToLower() == "patient"
+            );
         }
-
-
     }
 }

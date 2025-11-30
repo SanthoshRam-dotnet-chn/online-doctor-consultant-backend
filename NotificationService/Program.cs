@@ -1,6 +1,6 @@
-using NotificationService.Services;
-
+using NotificationService.GrpcServices;
 using NotificationService.Middleware;
+using NotificationService.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,7 +21,7 @@ builder.Services.AddSingleton<IEmailService, EmailService>();
 
 
 builder.Services.AddLogging(); // Important for ILogger
-
+builder.Services.AddGrpc();
 
 var app = builder.Build();
 app.UseMiddleware<GlobalExceptionMiddleware>();
@@ -33,7 +33,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.MapGrpcService<NotificationGrpcService>();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

@@ -18,7 +18,7 @@ namespace NotificationService.Services
         {
             try
             {
-                string subject = "Welcome to Our Service!";
+                string subject = "Welcome to Doc2U";
                 string body = TemplateHelper.LoadTemplate("RegistrationEmail.html", new Dictionary<string, string>
                 {
                     { "Name", evt.Name },

@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option csharp_namespace = "NotificationService.Protos";
+
+service NotificationGrpc {
+  rpc SendRegistrationNotification (RegistrationRequest) returns (RegistrationResponse);
+}
+
+message RegistrationRequest {
+  string name = 1;
+  string email = 2;
+  string registrationDate = 3; // string format: ISO date or yyyy-MM-dd
+}
+
+message RegistrationResponse {
+  bool success = 1;
+  string message = 2;
+}
+

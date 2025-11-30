@@ -1,5 +1,6 @@
 using System.Security.Claims;
 using System.Text;
+using AuthService.Protos;
 using AuthService.src.AuthService.Api.Middleware;
 using AuthService.src.AuthService.Application.Interfaces;
 using AuthService.src.AuthService.Application.Services;
@@ -21,6 +22,11 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IAuthService, UserAuthService>();
 builder.Services.AddSingleton<JwtTokenGenerator>();
+
+builder.Services.AddGrpcClient<NotificationGrpc.NotificationGrpcClient>(o =>
+{
+    o.Address = new Uri("http://localhost:5006"); // NotificationService URL
+});
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>

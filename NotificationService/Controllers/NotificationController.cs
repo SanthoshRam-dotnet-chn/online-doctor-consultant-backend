@@ -81,7 +81,7 @@ namespace NotificationService.Controllers
             {
                 await _meetingEndedService.HandleAsync(request);
                 return Ok("Meeting ended email sent successfully.");
-            }
+            }   
             catch (Exception ex)
             {
                 _logger.LogError(ex, $"Error sending meeting ended email to {request.PatientEmail}");

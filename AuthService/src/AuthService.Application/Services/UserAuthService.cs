@@ -1,4 +1,5 @@
-﻿using AuthService.src.AuthService.Application.DTOs;
+﻿using AuthService.Protos;
+using AuthService.src.AuthService.Application.DTOs;
 using AuthService.src.AuthService.Application.Exceptions;
 using AuthService.src.AuthService.Application.Interfaces;
 using AuthService.src.AuthService.Domain.Entities;
@@ -13,12 +14,14 @@ namespace AuthService.src.AuthService.Application.Services
         private readonly IUserRepository _repo;
         private readonly JwtTokenGenerator _jwt;
         private readonly PasswordHasher<User> _hasher;
+        private readonly NotificationGrpc.NotificationGrpcClient _grpcClient;
 
-        public UserAuthService(IUserRepository repo, JwtTokenGenerator jwt)
+        public UserAuthService(IUserRepository repo, JwtTokenGenerator jwt, NotificationGrpc.NotificationGrpcClient grpcClient)
         {
             _repo = repo;
             _jwt = jwt;
             _hasher = new PasswordHasher<User>();
+            _grpcClient = grpcClient;
         }
 
         public async Task<AuthResult> RegisterAsync(RegisterRequest req)
@@ -38,6 +41,13 @@ namespace AuthService.src.AuthService.Application.Services
 
             user.PasswordHash = _hasher.HashPassword(user, req.Password);
             await _repo.AddAsync(user);
+
+            await _grpcClient.SendRegistrationNotificationAsync(new RegistrationRequest
+            {
+                Email = req.Email,
+                Name = req.FirstName,
+                RegistrationDate = DateTime.Now.ToString("yyyy-MM-dd")
+            });
 
             var token = _jwt.GenerateToken(user);
 
