@@ -43,6 +43,11 @@ namespace AuthService.src.AuthService.Infrastructure.Repositories
             return await _db.Users
                 .FirstOrDefaultAsync(d => d.UserId == id);
         }
+        public async Task<User?> GetPatientByIdAsync(Guid id)
+        {
+            return await _db.Users
+                .FirstOrDefaultAsync(p => p.UserId == id && p.Role.ToLower() == "patient");
+        }
 
 
     }
