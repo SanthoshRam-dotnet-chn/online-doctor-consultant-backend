@@ -21,19 +21,17 @@ namespace AuthService.src.AuthService.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllDoctors() => Ok(await _service.GetAllDoctorsAsync());
 
-        //[Authorize]
+        [Authorize]
         [HttpGet("{id:guid}")]
         public async Task<IActionResult> GetDoctorById(Guid id)
         {
             var doctor = await _service.GetDoctorByIdAsync(id);
 
             if (doctor == null)
-             throw new UserNotFoundException("Doctor Not Found");
+                throw new UserNotFoundException("Doctor Not Found");
 
             return Ok(doctor);
         }
-
-
 
         [HttpGet("test")]
         public async Task<IActionResult> Test() => Ok("Doctor Service is working!");

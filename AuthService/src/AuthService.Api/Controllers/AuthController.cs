@@ -1,9 +1,9 @@
-﻿using AuthService.src.AuthService.Application.DTOs;
+﻿using System.Security.Claims;
+using AuthService.src.AuthService.Application.DTOs;
 using AuthService.src.AuthService.Application.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 
 namespace AuthService.src.AuthService.Api.Controllers
 {
@@ -11,7 +11,6 @@ namespace AuthService.src.AuthService.Api.Controllers
     [Route("api/auth")]
     public class AuthController : ControllerBase
     {
-
         private readonly IAuthService _auth;
         private readonly IWebHostEnvironment _env;
 
@@ -20,7 +19,6 @@ namespace AuthService.src.AuthService.Api.Controllers
             _auth = auth;
             _env = env;
         }
-
 
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequest req)
@@ -50,16 +48,18 @@ namespace AuthService.src.AuthService.Api.Controllers
         }
 
         [HttpGet("me")]
+        [Authorize]
         public async Task<IActionResult> Me()
         {
-            // Extract user info from token (if necessary) or implement repo lookup using claims.
-            if (!User.Identity.IsAuthenticated)
+            var email = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+            if (string.IsNullOrEmpty(email))
                 return Unauthorized();
 
-            var email = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
-            var role = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
+            var user = await _auth.GetUserByEmailAsync(email);
+            if (user == null)
+                return Unauthorized();
 
-            return Ok(new { Email = email, Role = role });
+            return Ok(user); // returns user info
         }
 
         private void SetJwtCookie(string token)
@@ -70,7 +70,7 @@ namespace AuthService.src.AuthService.Api.Controllers
                 Secure = true, // secure in production
                 SameSite = SameSiteMode.Lax,
                 Expires = DateTime.UtcNow.AddDays(1),
-                Path = "/"
+                Path = "/",
             };
             Response.Cookies.Append("jwt", token, cookieOptions);
         }
