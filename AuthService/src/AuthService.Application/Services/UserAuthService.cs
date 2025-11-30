@@ -41,13 +41,18 @@ namespace AuthService.src.AuthService.Application.Services
 
             user.PasswordHash = _hasher.HashPassword(user, req.Password);
             await _repo.AddAsync(user);
+            
 
-            await _grpcClient.SendRegistrationNotificationAsync(new RegistrationRequest
-            {
-                Email = req.Email,
-                Name = req.FirstName,
-                RegistrationDate = DateTime.Now.ToString("yyyy-MM-dd")
-            });
+            //disable this block , if you testing only register endpoint. or else
+
+            //make sure the notification service is running to send notification to USER
+
+            //await _grpcClient.SendRegistrationNotificationAsync(new RegistrationRequest
+            //{
+            //    Email = req.Email,
+            //    Name = req.FirstName,
+            //    RegistrationDate = DateTime.Now.ToString("yyyy-MM-dd")
+            //});
 
             var token = _jwt.GenerateToken(user);
 
