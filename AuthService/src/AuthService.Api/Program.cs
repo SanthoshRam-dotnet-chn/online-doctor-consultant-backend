@@ -1,3 +1,4 @@
+//Program.cs for AuthService.Api
 using System.Security.Claims;
 using System.Text;
 using AuthService.Protos;
@@ -27,7 +28,7 @@ builder.Services.AddGrpcClient<NotificationGrpc.NotificationGrpcClient>(o =>
 {
     o.Address = new Uri("http://localhost:5006"); // NotificationService URL
 });
-
+// JWT Authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -63,6 +64,7 @@ builder.Services.AddAuthorization();
 //Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+// CORS to connect with Frontend
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend",

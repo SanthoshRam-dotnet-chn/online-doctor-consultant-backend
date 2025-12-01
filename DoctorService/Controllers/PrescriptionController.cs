@@ -1,5 +1,6 @@
 ﻿using DoctorService.Interfaces;
 using DoctorService.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DoctorService.Controllers
@@ -16,6 +17,7 @@ namespace DoctorService.Controllers
         }
 
         [HttpGet("{prescriptionId}")]
+        [Authorize]
         public async Task<IActionResult> GetPrescriptionById(Guid prescriptionId)
         {
             var prescription = await _service.GetPrescriptionByIdAsync(prescriptionId);
@@ -23,6 +25,7 @@ namespace DoctorService.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> CreatePrescription([FromBody] Prescription prescription)
         {
             var created = await _service.CreatePrescriptionAsync(prescription);

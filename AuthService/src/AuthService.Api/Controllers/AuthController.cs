@@ -41,6 +41,7 @@ namespace AuthService.src.AuthService.Api.Controllers
         }
 
         [HttpPost("logout")]
+        [Authorize]
         public IActionResult Logout()
         {
             Response.Cookies.Delete("jwt");

@@ -32,6 +32,13 @@ namespace PatientService.Repositories
                 .Where(a => a.PatientId == patientId)
                 .ToListAsync();
         }
+
+        public async Task<IEnumerable<Appointment>> GetByDoctorId(Guid doctorId)
+        {
+            return await _context.Appointments
+                .Where(a => a.DoctorId == doctorId)
+                .ToListAsync();
+        }
     }
 
 }

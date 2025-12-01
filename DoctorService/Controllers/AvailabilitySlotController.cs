@@ -18,6 +18,7 @@ namespace DoctorService.Controllers
         }
 
         [HttpGet("{doctorId}")]
+        [Authorize]
         public async Task<IActionResult> GetSlotsByDoctor(Guid doctorId)
         {
             var slots = await _service.GetSlotsByDoctorAsync(doctorId);
@@ -25,6 +26,7 @@ namespace DoctorService.Controllers
         }
 
         [HttpGet("{doctorId}/{date}")]
+        [Authorize]
         public async Task<IActionResult> GetSlotsByDoctorAndDate(Guid doctorId, DateTime date)
         {
             var slots = await _service.GetSlotsByDoctorAndDateAsync(doctorId, date);
@@ -32,6 +34,7 @@ namespace DoctorService.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> CreateSlot([FromBody] AvailabilitySlot slot)
         {
             var created = await _service.CreateSlotAsync(slot);
@@ -39,7 +42,7 @@ namespace DoctorService.Controllers
         }
 
         [HttpDelete("{id}")]
-      
+        [Authorize]
         public async Task<IActionResult> DeleteSlot(Guid id)
         {
             await _service.DeleteSlotAsync(id);
@@ -47,13 +50,46 @@ namespace DoctorService.Controllers
         }
 
         [HttpGet("all")]
+        [Authorize]
         public async Task<IActionResult> GetAllSlots()
         {
             var appointments = await _service.GetAllSlotsAsync();
             return Ok(appointments);
         }
 
-        [HttpGet("test")]
-        public async Task<IActionResult> Test() => Ok("Available Slots Service is working!");
+        [HttpPatch("book/{id}")]
+        //[Authorize]
+        public async Task<IActionResult> MarkAsBooked(Guid id)
+        {
+            try
+            {
+                await _service.MarkSlotAsBookedAsync(id);
+                return Ok(new { success = true, message = "Slot marked as booked." });
+            }
+            catch (SlotNotFoundException ex)
+            {
+                return NotFound(new { success = false, message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { success = false, message = ex.Message });
+            }
+        }
+
+        [HttpGet("slot/{id}")]
+        //[Authorize]
+        public async Task<IActionResult> GetSlotById(Guid id)
+        {
+            try
+            {
+                var slot = await _service.GetSlotByIdAsync(id);
+                return Ok(slot);
+            }
+            catch (SlotNotFoundException ex)
+            {
+                return NotFound(new { success = false, message = ex.Message });
+            }
+        }
+
     }
 }
