@@ -23,8 +23,8 @@ namespace DoctorService.Repositories
         {
             // To clear doctor's previous slots using trigger/stored procedure
             return await _context.AvailabilitySlots
-                .FromSqlRaw("EXEC Clear_Prev_Slots")
-                .ToListAsync();
+                 .FromSqlRaw("EXEC Clear_Prev_Slots")
+                 .ToListAsync();
         }
 
         public async Task DeleteSlotAsync(Guid id)

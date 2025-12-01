@@ -13,5 +13,5 @@ public partial class AvailabilitySlot
 
     public DateTime EndTime { get; set; }
 
-    public bool IsAvailable { get; set; }
+    public bool IsAvailable { get; set; } = false;
 }
