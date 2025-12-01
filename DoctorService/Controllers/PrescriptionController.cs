@@ -28,5 +28,8 @@ namespace DoctorService.Controllers
             var created = await _service.CreatePrescriptionAsync(prescription);
             return Ok(created);
         }
+
+        [HttpGet("test")]
+        public async Task<IActionResult> Test() => Ok("Prescription Service is working!");
     }
 }

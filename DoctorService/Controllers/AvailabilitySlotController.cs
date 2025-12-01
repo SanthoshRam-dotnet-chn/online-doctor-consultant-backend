@@ -1,6 +1,7 @@
 ﻿using DoctorService.Exceptions;
 using DoctorService.Interfaces;
 using DoctorService.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DoctorService.Controllers
@@ -38,6 +39,7 @@ namespace DoctorService.Controllers
         }
 
         [HttpDelete("{id}")]
+      
         public async Task<IActionResult> DeleteSlot(Guid id)
         {
             await _service.DeleteSlotAsync(id);
@@ -50,5 +52,8 @@ namespace DoctorService.Controllers
             var appointments = await _service.GetAllSlotsAsync();
             return Ok(appointments);
         }
+
+        [HttpGet("test")]
+        public async Task<IActionResult> Test() => Ok("Available Slots Service is working!");
     }
 }

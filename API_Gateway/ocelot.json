@@ -1,20 +1,50 @@
 {
   "Routes": [
+
+    /* ======================= AUTH SERVICE ======================= */
     {
-      "DownstreamPathTemplate": "/api/auth/",
+      "DownstreamPathTemplate": "/api/auth/{everything}",
       "DownstreamScheme": "http",
-      //Please ensure that the port matches the AuthService launchSettings.json port
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
           "Port": 5288
         }
       ],
-      "UpstreamPathTemplate": "/api/auth/",
-      "UpstreamHttpMethod": [ "POST", "GET" ]
+      "UpstreamPathTemplate": "/api/auth/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ]
     },
+
     {
-      "DownstreamPathTemplate": "/api/doctors/",
+      "DownstreamPathTemplate": "/api/doctors/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5288
+        }
+      ],
+      "UpstreamPathTemplate": "/api/doctors/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ]
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/patients/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5288
+        }
+      ],
+      "UpstreamPathTemplate": "/api/patients/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ]
+    },
+
+
+    /* ======================= DOCTOR SERVICE ======================= */
+    {
+      "DownstreamPathTemplate": "/api/availabilityslot/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -22,10 +52,80 @@
           "Port": 5186
         }
       ],
-      "UpstreamPathTemplate": "/api/doctors/",
+      "UpstreamPathTemplate": "/api/availabilityslot/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "DELETE" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/prescription/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5186
+        }
+      ],
+      "UpstreamPathTemplate": "/api/prescription/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST" ]
+    },
+
+
+    /* ======================= NOTIFICATION SERVICE ======================= */
+    {
+      "DownstreamPathTemplate": "/api/notification/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5006
+        }
+      ],
+      "UpstreamPathTemplate": "/api/notification/{everything}",
+      "UpstreamHttpMethod": [ "GET","POST" ]
+    },
+
+
+    /* ======================= PATIENT SERVICE ======================= */
+    {
+      "DownstreamPathTemplate": "/api/patient/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5239
+        }
+      ],
+      "UpstreamPathTemplate": "/api/patient/{everything}",
       "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/patient/records/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5239
+        }
+      ],
+      "UpstreamPathTemplate": "/api/patient/records/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "DELETE" ]
+    },
+
+
+    /* ======================= VIDEO SERVICE ======================= */
+    {
+      "DownstreamPathTemplate": "/video/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5002
+        }
+      ],
+      "UpstreamPathTemplate": "/video/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PATCH" ]
     }
   ],
+
   "GlobalConfiguration": {
     "BaseUrl": "http://localhost:5013"
   }

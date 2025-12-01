@@ -9,5 +9,7 @@ namespace DoctorService.Interfaces
         Task<AvailabilitySlot> CreateSlotAsync(AvailabilitySlot slot);
         Task DeleteSlotAsync(Guid id);
         Task<IEnumerable<AvailabilitySlot>> GetAllSlotsAsync();
+        //Task<bool> MarkAsBookedAsync(Guid id);
+        Task MarkSlotAsBookedAsync(Guid id);
     }
 }

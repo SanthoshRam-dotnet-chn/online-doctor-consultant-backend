@@ -55,6 +55,9 @@ namespace PatientService.Controllers
             var result = await _service.GetAppointmentsForPatient(patientId);
             return Ok(result);
         }
+
+        [HttpGet("test")]
+        public async Task<IActionResult> Test() => Ok("Patient Service is working!");
     }
 
 }

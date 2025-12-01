@@ -88,5 +88,8 @@ namespace NotificationService.Controllers
                 return StatusCode(500, $"Error sending email: {ex.Message}");
             }
         }
+
+        [HttpGet("test")]
+        public async Task<IActionResult> Test() => Ok("Notification Service is working!");
     }
 }
