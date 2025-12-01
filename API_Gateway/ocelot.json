@@ -53,7 +53,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/availabilityslot/{everything}",
-      "UpstreamHttpMethod": [ "GET", "POST", "DELETE" ]
+      "UpstreamHttpMethod": [ "GET", "POST", "DELETE","PATCH"]
     },
     {
       "DownstreamPathTemplate": "/api/prescription/{everything}",

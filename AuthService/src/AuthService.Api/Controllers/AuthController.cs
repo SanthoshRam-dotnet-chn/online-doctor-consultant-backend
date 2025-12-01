@@ -21,7 +21,6 @@ namespace AuthService.src.AuthService.Api.Controllers
         }
 
         [HttpPost("register")]
-        [Authorize]
         public async Task<IActionResult> Register([FromBody] RegisterRequest req)
         {
             var result = await _auth.RegisterAsync(req);
@@ -32,7 +31,6 @@ namespace AuthService.src.AuthService.Api.Controllers
         }
 
         [HttpPost("login")]
-        [Authorize]
         public async Task<IActionResult> Login([FromBody] LoginRequest req)
         {
             var result = await _auth.LoginAsync(req);
