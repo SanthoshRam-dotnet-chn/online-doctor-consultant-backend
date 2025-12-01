@@ -8,6 +8,7 @@ namespace PatientService.Repositories
         Task<Appointment> Create(Appointment appointment);
         Task<Appointment?> GetById(Guid id);
         Task<IEnumerable<Appointment>> GetByPatientId(Guid patientId);
+        Task<IEnumerable<Appointment>> GetByDoctorId(Guid doctorId);
     }
 
 }

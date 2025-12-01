@@ -11,5 +11,6 @@ namespace DoctorService.Interfaces
         Task<IEnumerable<AvailabilitySlot>> GetAllSlotsAsync();
         //Task<bool> MarkAsBookedAsync(Guid id);
         Task MarkSlotAsBookedAsync(Guid id);
+        Task<AvailabilitySlot> GetSlotByIdAsync(Guid id);
     }
 }

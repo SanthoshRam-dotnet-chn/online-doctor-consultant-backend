@@ -36,7 +36,8 @@ namespace PatientService.Services
                 Id = Guid.NewGuid(),
                 SlotId = request.SlotId,
                 PatientId = request.PatientId,
-                CreatedAt = DateTime.UtcNow
+                CreatedAt = DateTime.UtcNow,
+                DoctorId = slot.DoctorId
             };
 
             await _repo.Create(appointment);
@@ -98,6 +99,32 @@ namespace PatientService.Services
 
             return responses;
         }
+
+        public async Task<IEnumerable<AppointmentResponse>> GetAppointmentsForDoctor(Guid doctorId)
+        {
+            var list = await _repo.GetByDoctorId(doctorId);
+
+            var responses = new List<AppointmentResponse>();
+
+            foreach (var appointment in list)
+            {
+                var slot = await _doctorClient.GetSlotById(appointment.SlotId);
+                if (slot == null) continue;
+
+                responses.Add(new AppointmentResponse
+                {
+                    AppointmentId = appointment.Id,
+                    DoctorId = slot.DoctorId,
+                    StartTime = slot.StartTime,
+                    EndTime = slot.EndTime,
+                    PatientId = appointment.PatientId,
+                    CreatedAt = appointment.CreatedAt
+                });
+            }
+
+            return responses;
+        }
+
     }
 
 }

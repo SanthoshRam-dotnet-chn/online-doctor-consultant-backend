@@ -1,7 +1,6 @@
 ﻿using DoctorService.Exceptions;
 using DoctorService.Interfaces;
 using DoctorService.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DoctorService.Controllers
@@ -57,7 +56,5 @@ namespace DoctorService.Controllers
             return Ok(appointments);
         }
 
-        [HttpGet("test")]
-        public async Task<IActionResult> Test() => Ok("Available Slots Service is working!");
     }
 }
