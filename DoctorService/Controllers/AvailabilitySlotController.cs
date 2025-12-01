@@ -1,7 +1,6 @@
 ﻿using DoctorService.Exceptions;
 using DoctorService.Interfaces;
 using DoctorService.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DoctorService.Controllers
@@ -39,21 +38,43 @@ namespace DoctorService.Controllers
         }
 
         [HttpDelete("{id}")]
-      
         public async Task<IActionResult> DeleteSlot(Guid id)
         {
             await _service.DeleteSlotAsync(id);
             return NoContent();
         }
 
-        [HttpGet("all")]
-        public async Task<IActionResult> GetAllSlots()
+        [HttpPatch("book/{id}")]
+        public async Task<IActionResult> MarkAsBooked(Guid id)
         {
-            var appointments = await _service.GetAllSlotsAsync();
-            return Ok(appointments);
+            try
+            {
+                await _service.MarkSlotAsBookedAsync(id);
+                return Ok(new { success = true, message = "Slot marked as booked." });
+            }
+            catch (SlotNotFoundException ex)
+            {
+                return NotFound(new { success = false, message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { success = false, message = ex.Message });
+            }
         }
 
-        [HttpGet("test")]
-        public async Task<IActionResult> Test() => Ok("Available Slots Service is working!");
+        [HttpGet("slot/{id}")]
+        public async Task<IActionResult> GetSlotById(Guid id)
+        {
+            try
+            {
+                var slot = await _service.GetSlotByIdAsync(id);
+                return Ok(slot);
+            }
+            catch (SlotNotFoundException ex)
+            {
+                return NotFound(new { success = false, message = ex.Message });
+            }
+        }
+
     }
 }
