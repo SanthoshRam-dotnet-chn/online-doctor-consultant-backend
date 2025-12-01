@@ -1,30 +1,19 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Swashbuckle.AspNetCore.Annotations;
+using System.Collections.Generic;
 
-namespace DoctorService.Models
+namespace DoctorService.Models;
+
+public partial class Prescription
 {
-    public class Prescription
-    {
+    public Guid PrescriptionId { get; set; }
 
-        [Key]
-        public Guid PrescriptionId { get; set; } = Guid.NewGuid();
+    public Guid DoctorId { get; set; }
 
-        [Required]
-        public Guid DoctorId { get; set; }
+    public Guid PatientId { get; set; }
 
-        [Required]
-        public Guid PatientId { get; set; }
+    public string Description { get; set; } = null!;
 
-        [Required]
-        [MaxLength(500)]
-        public string? Description { get; set; }
+    public DateTime Date { get; set; }
 
-        [Required]
-        public DateTime Date { get; set; }
-
-        [Required]
-        public Guid AppointmentId { get; set; }
-    }
+    public Guid AppointmentId { get; set; }
 }

@@ -42,5 +42,12 @@ namespace DoctorService.Controllers
             await _service.DeleteSlotAsync(id);
             return NoContent();
         }
+
+        [HttpGet("all")]
+        public async Task<IActionResult> GetAllSlots()
+        {
+            var appointments = await _service.GetAllSlotsAsync();
+            return Ok(appointments);
+        }
     }
 }
