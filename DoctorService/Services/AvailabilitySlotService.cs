@@ -13,6 +13,11 @@ namespace DoctorService.Services
             _repository = repository;
         }
 
+        public async Task<IEnumerable<AvailabilitySlot>> GetAllSlotsAsync()
+        {
+            return await _repository.GetAllSlotsAsync();
+        }
+
         public async Task<AvailabilitySlot> CreateSlotAsync(AvailabilitySlot slot)
         {
             bool exists = await _repository.SlotExistsAsync(slot.DoctorId, slot.StartTime, slot.EndTime);

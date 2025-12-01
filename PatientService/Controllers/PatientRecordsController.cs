@@ -118,5 +118,8 @@ namespace PatientService.Controllers
                 return BadRequest(new { success = false, message = ex.Message });
             }
         }
+
+        [HttpGet("test")]
+        public async Task<IActionResult> Test() => Ok("Patient Records Service is working!");
     }
 }

@@ -45,6 +45,9 @@ namespace VideoService.Controllers
             return ok ? Ok() : NotFound();
         }
 
+        [HttpGet("test")]
+        public async Task<IActionResult> Test() => Ok("Video Service is working!");
+
         [HttpGet("join")]
         public async Task<IActionResult> Join([FromQuery] string token)
         {
