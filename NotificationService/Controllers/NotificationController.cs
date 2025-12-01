@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NotificationService.Events;
 using NotificationService.Services;
@@ -30,6 +31,7 @@ namespace NotificationService.Controllers
         }
 
         [HttpPost("registration")]
+        [Authorize]
         public async Task<IActionResult> SendRegistration([FromBody] RegistrationEvent request)
         {
             try
@@ -45,6 +47,7 @@ namespace NotificationService.Controllers
         }
 
         [HttpPost("meeting-confirmed")]
+        [Authorize]
         public async Task<IActionResult> SendMeetingConfirmed([FromBody] MeetingConfirmedEvent request)
         {
             try
@@ -60,6 +63,7 @@ namespace NotificationService.Controllers
         }
 
         [HttpPost("meeting-cancelled")]
+        [Authorize]
         public async Task<IActionResult> SendMeetingCancelled([FromBody] MeetingCancelledEvent request)
         {
             try
@@ -75,6 +79,7 @@ namespace NotificationService.Controllers
         }
 
         [HttpPost("meeting-ended")]
+        [Authorize]
         public async Task<IActionResult> SendMeetingEnded([FromBody] MeetingEndedEvent request)
         {
             try

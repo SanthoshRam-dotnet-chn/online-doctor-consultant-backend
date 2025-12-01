@@ -18,6 +18,7 @@ namespace DoctorService.Controllers
         }
 
         [HttpGet("{doctorId}")]
+        [Authorize]
         public async Task<IActionResult> GetSlotsByDoctor(Guid doctorId)
         {
             var slots = await _service.GetSlotsByDoctorAsync(doctorId);
@@ -25,6 +26,7 @@ namespace DoctorService.Controllers
         }
 
         [HttpGet("{doctorId}/{date}")]
+        [Authorize]
         public async Task<IActionResult> GetSlotsByDoctorAndDate(Guid doctorId, DateTime date)
         {
             var slots = await _service.GetSlotsByDoctorAndDateAsync(doctorId, date);
@@ -32,6 +34,7 @@ namespace DoctorService.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> CreateSlot([FromBody] AvailabilitySlot slot)
         {
             var created = await _service.CreateSlotAsync(slot);
@@ -39,7 +42,7 @@ namespace DoctorService.Controllers
         }
 
         [HttpDelete("{id}")]
-      
+        [Authorize]
         public async Task<IActionResult> DeleteSlot(Guid id)
         {
             await _service.DeleteSlotAsync(id);
@@ -47,6 +50,7 @@ namespace DoctorService.Controllers
         }
 
         [HttpGet("all")]
+        [Authorize]
         public async Task<IActionResult> GetAllSlots()
         {
             var appointments = await _service.GetAllSlotsAsync();

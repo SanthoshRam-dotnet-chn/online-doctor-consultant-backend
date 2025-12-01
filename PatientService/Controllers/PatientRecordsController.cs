@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PatientService.Domain.Dtos;
 using PatientService.Repositories;
 using PatientService.Services;
@@ -22,6 +23,7 @@ namespace PatientService.Controllers
 
         // Create or update doctor's notes for a patient (one record per patient)
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> CreateOrUpdate([FromBody] CreateOrUpdateRecordRequest request)
         {
             var result = await _service.CreateOrUpdateRecordAsync(request);
@@ -30,6 +32,7 @@ namespace PatientService.Controllers
 
         // Get patient record
         [HttpGet("{patientId:guid}")]
+        [Authorize]
         public async Task<IActionResult> GetRecord(Guid patientId)
         {
             var record = await _service.GetRecordByPatientIdAsync(patientId);
@@ -42,6 +45,7 @@ namespace PatientService.Controllers
         // Upload an attachment (multipart/form-data)
         // form-data: file (file)
         [HttpPost("{patientId:guid}/attachments")]
+        [Authorize]
         [RequestSizeLimit(50_000_000)] // 50 MB limit - adjust as needed
         public async Task<IActionResult> UploadAttachment(Guid patientId, IFormFile file)
         {
@@ -68,6 +72,7 @@ namespace PatientService.Controllers
 
         // Download attachment
         [HttpGet("{patientId:guid}/attachments/{attachmentId:guid}/download")]
+        [Authorize]
         public async Task<IActionResult> Download(Guid patientId, Guid attachmentId)
         {
             // fetch via repository to get stored filename
@@ -106,6 +111,7 @@ namespace PatientService.Controllers
 
         // Soft-delete attachment
         [HttpDelete("{patientId:guid}/attachments/{attachmentId:guid}")]
+        [Authorize]
         public async Task<IActionResult> SoftDeleteAttachment(Guid patientId, Guid attachmentId)
         {
             try

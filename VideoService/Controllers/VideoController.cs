@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using VideoService.Infrastructure;
@@ -25,6 +26,7 @@ namespace VideoService.Controllers
         }
 
         [HttpPost("create")]
+        [Authorize]
         public async Task<IActionResult> CreateRoom([FromBody] Guid appointmentId)
         {
             var room = await _videoService.CreateRoom(appointmentId);
@@ -32,6 +34,7 @@ namespace VideoService.Controllers
         }
 
         [HttpPost("generate-link")]
+        [Authorize]
         public async Task<IActionResult> GenerateLink([FromBody] GenerateLinkRequest req)
         {
             var link = await _videoService.GenerateJoinLink(req.AppointmentId, req.UserId, req.Role);
@@ -39,6 +42,7 @@ namespace VideoService.Controllers
         }
 
         [HttpPatch("allow/{appointmentId}")]
+        [Authorize]
         public async Task<IActionResult> Allow(Guid appointmentId)
         {
             var ok = await _videoService.AllowPatient(appointmentId);
@@ -49,6 +53,7 @@ namespace VideoService.Controllers
         public async Task<IActionResult> Test() => Ok("Video Service is working!");
 
         [HttpGet("join")]
+        [Authorize]
         public async Task<IActionResult> Join([FromQuery] string token)
         {
             var principal = _tokenService.Validate(token);

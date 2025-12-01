@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PatientService.Domain.Entities;
 using PatientService.Services;
 
@@ -16,6 +17,7 @@ namespace PatientService.Controllers
         }
 
         [HttpPost("appointments")]
+        [Authorize]
         public async Task<IActionResult> BookAppointment([FromBody] BookAppointmentRequest request)
         {
             try
@@ -34,6 +36,7 @@ namespace PatientService.Controllers
         }
 
         [HttpGet("appointments/{appointmentId}")]
+        [Authorize]
         public async Task<IActionResult> GetAppointment(Guid appointmentId)
         {
             var result = await _service.GetAppointment(appointmentId);
@@ -50,6 +53,7 @@ namespace PatientService.Controllers
         }
 
         [HttpGet("appointments/patient/{patientId}")]
+        [Authorize]
         public async Task<IActionResult> GetAppointmentsForPatient(Guid patientId)
         {
             var result = await _service.GetAppointmentsForPatient(patientId);
