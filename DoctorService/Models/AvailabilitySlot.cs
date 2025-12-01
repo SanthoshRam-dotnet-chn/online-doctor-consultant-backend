@@ -1,23 +1,17 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
-namespace DoctorService.Models
+namespace DoctorService.Models;
+
+public partial class AvailabilitySlot
 {
-    public class AvailabilitySlot
-    {
-        [Key]
-        public Guid Id { get; set; }
+    public Guid Id { get; set; }
 
-        [Required]
-        public Guid DoctorId { get; set; }
+    public Guid DoctorId { get; set; }
 
-        [Required]
-        public DateTime StartTime { get; set; }
+    public DateTime StartTime { get; set; }
 
-        [Required]
-        public DateTime EndTime { get; set; }
+    public DateTime EndTime { get; set; }
 
-        [Required]
-        public bool IsAvailable { get; set; } = false;
-    }
+    public bool IsAvailable { get; set; }
 }

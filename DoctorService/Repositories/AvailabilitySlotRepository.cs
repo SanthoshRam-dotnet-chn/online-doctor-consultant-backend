@@ -19,6 +19,13 @@ namespace DoctorService.Repositories
             await _context.AvailabilitySlots.AddAsync(slot);
             await _context.SaveChangesAsync();
         }
+        public async Task<IEnumerable<AvailabilitySlot>> GetAllSlotsAsync()
+        {
+            // To clear doctor's previous slots using trigger/stored procedure
+            return await _context.AvailabilitySlots
+                .FromSqlRaw("EXEC Clear_Prev_Slots")
+                .ToListAsync();
+        }
 
         public async Task DeleteSlotAsync(Guid id)
         {
