@@ -11,6 +11,7 @@ namespace AuthService.src.AuthService.Infrastructure.Interfaces
         Task<IEnumerable<User>> GetAllAsync();            
         Task<IEnumerable<User>> GetByRoleAsync(string role);
         Task<User?> GetDoctorByIdAsync(Guid id);
+        Task<User?> GetPatientByIdAsync(Guid id);
 
 
     }

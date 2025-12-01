@@ -1,4 +1,5 @@
-﻿using DoctorService.Interfaces;
+﻿using DoctorService.Exceptions;
+using DoctorService.Interfaces;
 using DoctorService.Models;
 using Microsoft.AspNetCore.Mvc;
 

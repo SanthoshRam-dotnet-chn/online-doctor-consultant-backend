@@ -51,6 +51,27 @@ namespace DoctorService.Services
             return slots.OrderBy(s => s.StartTime);
         }
 
-       
+        public async Task MarkSlotAsBookedAsync(Guid id)
+        {
+            var slot = await _repository.GetSlotByIdAsync(id);
+            if (slot == null)
+                throw new SlotNotFoundException("Slot not found.");
+
+            if (!slot.IsAvailable)
+                throw new Exception("Slot is already booked.");
+
+            await _repository.MarkAsBookedAsync(id);
+        }
+
+        public async Task<AvailabilitySlot> GetSlotByIdAsync(Guid id)
+        {
+            var slot = await _repository.GetSlotByIdAsync(id);
+            if (slot == null)
+                throw new SlotNotFoundException("Slot not found.");
+
+            return slot;
+        }
+
+
     }
 }
