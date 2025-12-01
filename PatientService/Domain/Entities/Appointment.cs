@@ -7,6 +7,7 @@
         public Guid DoctorId { get; set; }
         public Guid PatientId { get; set; }
         public DateTime CreatedAt { get; set; }
+        public string status { get; set; } = "scheduled";
     }
 
 }
