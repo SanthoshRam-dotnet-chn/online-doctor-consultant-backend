@@ -36,6 +36,7 @@ namespace PatientService.Services
                 Id = Guid.NewGuid(),
                 SlotId = request.SlotId,
                 PatientId = request.PatientId,
+                Reason = request.Reason,
                 CreatedAt = DateTime.UtcNow,
                 DoctorId = slot.DoctorId
             };
@@ -120,6 +121,7 @@ namespace PatientService.Services
                     EndTime = slot.EndTime,
                     PatientId = appointment.PatientId,
                     CreatedAt = appointment.CreatedAt,
+                    Reason = appointment.Reason,
                     Status = appointment.status
                 });
             }

@@ -49,8 +49,8 @@ namespace DoctorService.Controllers
             return NoContent();
         }
 
-        [HttpGet("all")]
         [Authorize]
+        [HttpGet("all")]
         public async Task<IActionResult> GetAllSlots()
         {
             var appointments = await _service.GetAllSlotsAsync();

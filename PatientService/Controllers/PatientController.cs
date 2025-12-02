@@ -17,7 +17,7 @@ namespace PatientService.Controllers
         }
 
         [HttpPost("appointments")]
-        //[Authorize]
+        [Authorize]
         public async Task<IActionResult> BookAppointment([FromBody] BookAppointmentRequest request)
         {
             try
@@ -36,7 +36,7 @@ namespace PatientService.Controllers
         }
 
         [HttpGet("appointments/{appointmentId}")]
-        [Authorize]
+        // [Authorize]
         public async Task<IActionResult> GetAppointment(Guid appointmentId)
         {
             var result = await _service.GetAppointment(appointmentId);
