@@ -93,6 +93,7 @@ namespace PatientService.Services
                     StartTime = slot.StartTime,
                     EndTime = slot.EndTime,
                     PatientId = appointment.PatientId,
+                    Status = appointment.status,
                     CreatedAt = appointment.CreatedAt
                 });
             }

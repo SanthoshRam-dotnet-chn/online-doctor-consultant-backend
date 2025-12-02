@@ -21,10 +21,18 @@ namespace DoctorService.Repositories
         }
         public async Task<IEnumerable<AvailabilitySlot>> GetAllSlotsAsync()
         {
-            // To clear doctor's previous slots using trigger/stored procedure
+            //use this in testing.
             return await _context.AvailabilitySlots
-                 .FromSqlRaw("EXEC Clear_Prev_Slots")
-                 .ToListAsync();
+                .ToListAsync();
+
+            // To clear doctor's previous slots using trigger/stored procedure
+            // This will clear the expired slots from the database., if you dont have the SQL trigger file,
+            // then this wont work
+            // Enable this only in production.
+            //return await _context.AvailabilitySlots
+            //     .FromSqlRaw("EXEC Clear_Prev_Slots")
+            //     .ToListAsync();
+
         }
 
         public async Task DeleteSlotAsync(Guid id)

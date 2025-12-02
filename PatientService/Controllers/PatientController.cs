@@ -17,7 +17,7 @@ namespace PatientService.Controllers
         }
 
         [HttpPost("appointments")]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> BookAppointment([FromBody] BookAppointmentRequest request)
         {
             try

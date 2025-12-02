@@ -36,6 +36,7 @@ namespace AuthService.src.AuthService.Application.Services
                 Email = req.Email,
                 FirstName = req.FirstName,
                 LastName = req.LastName,
+                Phone = req.Phone,
                 Role = req.Role,
             };
 
