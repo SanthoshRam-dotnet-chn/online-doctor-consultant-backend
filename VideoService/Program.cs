@@ -55,6 +55,18 @@ builder.Services.AddHttpClient<IAppointmentClient, AppointmentClient>(c =>
     c.BaseAddress = new Uri(builder.Configuration["PatientService:BaseUrl"]);
 });
 
+// CORS to connect with Frontend
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend",
+        builder =>
+        {
+            builder.WithOrigins("http://localhost:5173", "https://9p4132k3-5173.inc1.devtunnels.ms", "http://localhost:5174")
+                   .AllowAnyHeader()
+                   .AllowAnyMethod()
+                   .AllowCredentials();
+        });
+});
 
 
 // controllers

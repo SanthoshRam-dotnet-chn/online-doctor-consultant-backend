@@ -52,26 +52,26 @@ namespace VideoService.Controllers
         [HttpGet("test")]
         public async Task<IActionResult> Test() => Ok("Video Service is working!");
 
-        [HttpGet("join")]
-        [Authorize]
-        public async Task<IActionResult> Join([FromQuery] string token)
-        {
-            var principal = _tokenService.Validate(token);
-            if (principal == null)
-                return Unauthorized("Invalid token");
+       [HttpGet("join")]
+[Authorize]
+public async Task<IActionResult> Join([FromQuery] string token)
+{
+    var principal = _tokenService.Validate(token);
+    if (principal == null)
+        return Unauthorized("Invalid token");
 
-            var apptId = Guid.Parse(principal.Claims.First(c => c.Type == "appointmentId").Value);
-            var role = principal.Claims.First(c => c.Type == ClaimTypes.Role).Value;
-            var userId = Guid.Parse(principal.Claims.First(c => c.Type == "userId").Value);
+    var apptId = Guid.Parse(principal.FindFirst("appointmentId")!.Value);
+    var role = principal.FindFirst(ClaimTypes.Role)!.Value;
+    var userId = Guid.Parse(principal.FindFirst("userId")!.Value);
 
-            var room = await _db.VideoRooms.FirstOrDefaultAsync(v => v.AppointmentId == apptId);
-            if (room == null) return NotFound("Room not found");
+    var room = await _db.VideoRooms.FirstOrDefaultAsync(v => v.AppointmentId == apptId);
+    if (room == null)
+        return NotFound("Room not found");
 
             if (room.IsWaitingRoomEnabled && role == "patient")
             {
                 var wr = await _db.WaitingRoomStatuses
                     .FirstOrDefaultAsync(w => w.AppointmentId == apptId && w.PatientId == userId);
-               
                 if (wr == null || wr.Status != "Allowed")
                     return Ok(new { status = "waiting", message = "Doctor will admit you shortly" });
             }
