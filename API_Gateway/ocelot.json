@@ -1,6 +1,5 @@
 {
   "Routes": [
-
     /* ======================= AUTH SERVICE ======================= */
     {
       "DownstreamPathTemplate": "/api/auth/{everything}",
@@ -12,7 +11,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/auth/{everything}",
-      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ]
+      "UpstreamHttpMethod": ["GET", "POST", "PUT", "DELETE"]
     },
 
     {
@@ -25,7 +24,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/doctors/{everything}",
-      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ]
+      "UpstreamHttpMethod": ["GET", "POST", "PUT", "DELETE"]
     },
 
     {
@@ -38,9 +37,8 @@
         }
       ],
       "UpstreamPathTemplate": "/api/patients/{everything}",
-      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ]
+      "UpstreamHttpMethod": ["GET", "POST", "PUT", "DELETE"]
     },
-
 
     /* ======================= DOCTOR SERVICE ======================= */
     {
@@ -53,7 +51,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/availabilityslot/{everything}",
-      "UpstreamHttpMethod": [ "GET", "POST", "DELETE","PATCH"]
+      "UpstreamHttpMethod": ["GET", "POST", "DELETE", "PATCH"]
     },
     {
       "DownstreamPathTemplate": "/api/prescription/{everything}",
@@ -65,9 +63,8 @@
         }
       ],
       "UpstreamPathTemplate": "/api/prescription/{everything}",
-      "UpstreamHttpMethod": [ "GET", "POST" ]
+      "UpstreamHttpMethod": ["GET", "POST"]
     },
-
 
     /* ======================= NOTIFICATION SERVICE ======================= */
     {
@@ -80,9 +77,8 @@
         }
       ],
       "UpstreamPathTemplate": "/api/notification/{everything}",
-      "UpstreamHttpMethod": [ "GET","POST" ]
+      "UpstreamHttpMethod": ["GET", "POST"]
     },
-
 
     /* ======================= PATIENT SERVICE ======================= */
     {
@@ -95,7 +91,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/patient/{everything}",
-      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ]
+      "UpstreamHttpMethod": ["GET", "POST", "PUT", "DELETE"]
     },
     {
       "DownstreamPathTemplate": "/api/patient/records/{everything}",
@@ -107,9 +103,8 @@
         }
       ],
       "UpstreamPathTemplate": "/api/patient/records/{everything}",
-      "UpstreamHttpMethod": [ "GET", "POST", "DELETE" ]
+      "UpstreamHttpMethod": ["GET", "POST", "DELETE"]
     },
-
 
     /* ======================= VIDEO SERVICE ======================= */
     {
@@ -122,7 +117,7 @@
         }
       ],
       "UpstreamPathTemplate": "/video/{everything}",
-      "UpstreamHttpMethod": [ "GET", "POST", "PATCH" ]
+      "UpstreamHttpMethod": ["GET", "POST", "PATCH", "DELETE"]
     }
   ],
 

@@ -37,7 +37,7 @@ namespace VideoService.Services
 
         public async Task<VideoRoom> CreateRoom(Guid appointmentId)
         {
-            var appt = await _apptClient.GetAppointment(appointmentId);
+            var appt = await _apptClient.GetAppointment(appointmentId);           
             if (appt == null)
                 throw new Exception("Appointment not found in PatientService");
 
