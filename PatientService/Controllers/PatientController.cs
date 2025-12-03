@@ -36,7 +36,7 @@ namespace PatientService.Controllers
         }
 
         [HttpGet("appointments/{appointmentId}")]
-        [Authorize]
+        // [Authorize]
         public async Task<IActionResult> GetAppointment(Guid appointmentId)
         {
             var result = await _service.GetAppointment(appointmentId);
