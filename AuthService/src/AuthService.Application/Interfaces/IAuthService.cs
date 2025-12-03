@@ -13,6 +13,9 @@ namespace AuthService.src.AuthService.Application.Interfaces
         Task<IEnumerable<UserDto>> GetAllUsersAsync();
         Task<DoctorDto?> GetDoctorByIdAsync(Guid id);
         Task<PatientDto?> GetPatientByIdAsync(Guid id);
+        Task<UserDto> UpdateProfileAsync(string email, UpdateProfileRequest request);
+
+        
 
 
     }

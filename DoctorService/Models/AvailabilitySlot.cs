@@ -5,9 +5,9 @@ namespace DoctorService.Models;
 
 public partial class AvailabilitySlot
 {
-    public Guid Id { get; set; }
+    public Guid Id { get; set; } 
 
-    public Guid DoctorId { get; set; }
+    public Guid DoctorId { get; set; } 
 
     public DateTime StartTime { get; set; }
 

@@ -15,6 +15,7 @@
 
         public string? Specialization { get; set; }
         public int? Experience { get; set; }
+          public byte[]? Photo { get; set; }
 
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     }

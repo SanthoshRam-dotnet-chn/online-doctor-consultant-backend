@@ -5,9 +5,9 @@ namespace DoctorService.Models;
 
 public partial class Prescription
 {
-    public Guid PrescriptionId { get; set; }
+    public Guid PrescriptionId { get; set; } 
 
-    public Guid DoctorId { get; set; }
+    public Guid DoctorId { get; set; } 
 
     public Guid PatientId { get; set; }
 

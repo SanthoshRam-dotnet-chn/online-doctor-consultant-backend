@@ -7,6 +7,7 @@
         public string LastName { get; set; }
 
         public string? Specialization { get; set; }
+        public string? Photo { get; set; }
         public int? Experience { get; set; }
     }
 }

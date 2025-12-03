@@ -98,6 +98,10 @@ namespace AuthService.src.AuthService.Application.Services
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Phone = user.Phone,
+               Photo = user.Photo != null
+    ? Convert.ToBase64String(user.Photo)
+    : null
+,
                 DateOfBirth = user.DateOfBirth,
             };
         }
@@ -130,6 +134,9 @@ namespace AuthService.src.AuthService.Application.Services
                     LastName = u.LastName,
                     Specialization = u.Specialization,
                     Experience = u.Experience,
+                    Photo = u.Photo != null
+                        ? Convert.ToBase64String(u.Photo)
+                        : null,
                 })
                 .ToList();
         }
@@ -148,6 +155,10 @@ namespace AuthService.src.AuthService.Application.Services
                 LastName = doctor.LastName,
                 Specialization = doctor.Specialization,
                 Experience = doctor.Experience,
+                Photo = doctor.Photo != null
+                    ? Convert.ToBase64String(doctor.Photo)
+                    : null,
+
             };
         }
 
@@ -185,5 +196,46 @@ namespace AuthService.src.AuthService.Application.Services
                 })
                 .ToList();
         }
+        public async Task<UserDto> UpdateProfileAsync(string email, UpdateProfileRequest req)
+{
+    var user = await _repo.GetByEmailAsync(email);
+    if (user == null)
+        throw new Exception("User not found");
+
+    user.FirstName = req.FirstName;
+    user.LastName = req.LastName;
+    user.Phone = req.Phone;
+
+if (!string.IsNullOrEmpty(req.Photo))
+{
+    var base64 = req.Photo.Contains(",")
+        ? req.Photo.Split(',')[1]
+        : req.Photo;
+
+    user.Photo = Convert.FromBase64String(base64);
+}
+
+
+
+    await _repo.UpdateAsync(user);
+
+    return new UserDto
+    {
+        UserId = user.UserId,
+        Email = user.Email,
+        Role = user.Role,
+        FirstName = user.FirstName,
+        LastName = user.LastName,
+        Phone = user.Phone,
+      Photo = user.Photo != null
+        ? Convert.ToBase64String(user.Photo)
+        : null,
+ // byte[]
+        DateOfBirth = user.DateOfBirth
+    };
+}
+
+       
+
     }
 }

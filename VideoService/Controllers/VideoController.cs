@@ -71,7 +71,7 @@ namespace VideoService.Controllers
             {
                 var wr = await _db.WaitingRoomStatuses
                     .FirstOrDefaultAsync(w => w.AppointmentId == apptId && w.PatientId == userId);
-
+               
                 if (wr == null || wr.Status != "Allowed")
                     return Ok(new { status = "waiting", message = "Doctor will admit you shortly" });
             }

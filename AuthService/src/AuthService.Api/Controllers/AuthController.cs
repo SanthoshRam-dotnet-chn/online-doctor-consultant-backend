@@ -87,5 +87,20 @@ namespace AuthService.src.AuthService.Api.Controllers
         [HttpGet("secure")]
         public async Task<IActionResult> ProtectedRoute() =>
             Ok("Secure Service is Working Good with JWT!");
+
+        [Authorize]
+        [HttpPut("upload-profile")]
+        public async Task<IActionResult> UpdateProfile([FromBody] UpdateProfileRequest req)
+        {
+            var email = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+            if (email == null) return Unauthorized();
+
+            var result = await _auth.UpdateProfileAsync(email, req);
+            return Ok(result);
+        }
+
+
+
+            
     }
 }
