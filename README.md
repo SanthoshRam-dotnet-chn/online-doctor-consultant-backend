@@ -42,10 +42,10 @@ VideoService	      - Jitsi-based secure video meeting management
 
 10. HttpClient for service to service communication
 
-===================================================
+========
 🔐 1. UserAuthService
 Handles all authentication and authorization workflows.
-===================================================
+========
 Features
 
 * User Registration & Login
@@ -58,10 +58,10 @@ Features
 
 * Profile Management
 
-===================================================
+========
 🧑‍⚕️ 2. DoctorService
 Manages doctor data and medical operations.
-===================================================
+========
 
 Features
 
@@ -75,10 +75,10 @@ Features
 
 * Create a Meeting room using and allow patient to join
 
-===================================================
-🧑‍⚕️ 3. PatientService
+========
+🧑 3. PatientService
 Responsible for patient-related workflows.
-===================================================
+========
 
 Features
 
@@ -92,10 +92,10 @@ Features
 
 * Join Consultation Call with respective Doctor
 
-===================================================
+========
 🔔 4. NotificationService
 Triggers email notifications for important events.
-===================================================
+========
 
 Sends Emails For:
 
@@ -109,10 +109,10 @@ Sends Emails For:
 
 * Reminder Notifications
 * 
-===================================================
+========
 🎥 5. VideoService (Jitsi Integration)
 Handles secure video consultations between doctor and patient.
-===================================================
+========
 
 Features
 
@@ -126,8 +126,9 @@ Features
 
 * Guarantees doctor-only room access and patient-only room entry
 
-<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+========
 -- Final Flow --
+========
 
 * Appointment created → VideoService stores meeting link
 
@@ -139,10 +140,10 @@ Features
 
 * Redirects to Jitsi meeting link securely
 
-#############################################
+===============
 DEMO
 ▶️ Running the Services
-#############################################
+==============
 
 1.  Clone the repo
     git clone https://github.com/SanthoshRam-dotnet-chn/online-doctor-consultant-backend.git
